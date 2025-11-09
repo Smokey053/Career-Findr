@@ -94,17 +94,19 @@ export const getCompanyJobs = async (companyId) => {
 export const getAllJobs = async (filters = {}) => {
   try {
     const jobsRef = collection(db, "jobs");
-    let q = query(jobsRef, where("status", "==", "active"));
+    const constraints = [where("status", "==", "active")];
 
     // Add filters if provided
     if (filters.type) {
-      q = query(q, where("type", "==", filters.type));
+      constraints.push(where("type", "==", filters.type));
     }
     if (filters.location) {
-      q = query(q, where("location", "==", filters.location));
+      constraints.push(where("location", "==", filters.location));
     }
 
-    q = query(q, orderBy("createdAt", "desc"));
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(jobsRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const jobs = [];
@@ -123,20 +125,22 @@ export const getAllJobs = async (filters = {}) => {
 export const searchJobs = async (filters = {}) => {
   try {
     const jobsRef = collection(db, "jobs");
-    let q = query(jobsRef, where("status", "==", "active"));
+    const constraints = [where("status", "==", "active")];
 
     // Add filters
     if (filters.type) {
-      q = query(q, where("type", "==", filters.type));
+      constraints.push(where("type", "==", filters.type));
     }
     if (filters.location) {
-      q = query(q, where("location", "==", filters.location));
+      constraints.push(where("location", "==", filters.location));
     }
     if (filters.experience) {
-      q = query(q, where("experienceLevel", "==", filters.experience));
+      constraints.push(where("experienceLevel", "==", filters.experience));
     }
 
-    q = query(q, orderBy("createdAt", "desc"));
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(jobsRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const jobs = [];

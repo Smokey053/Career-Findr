@@ -109,20 +109,21 @@ export const getInstitutionApplications = async (
 ) => {
   try {
     const applicationsRef = collection(db, "applications");
-    let q = query(
-      applicationsRef,
+    const constraints = [
       where("institutionId", "==", institutionId),
-      where("type", "==", "course")
-    );
+      where("type", "==", "course"),
+    ];
 
     if (filters.status) {
-      q = query(q, where("status", "==", filters.status));
+      constraints.push(where("status", "==", filters.status));
     }
     if (filters.courseId) {
-      q = query(q, where("courseId", "==", filters.courseId));
+      constraints.push(where("courseId", "==", filters.courseId));
     }
 
-    q = query(q, orderBy("createdAt", "desc"));
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(applicationsRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const applications = [];
@@ -141,20 +142,21 @@ export const getInstitutionApplications = async (
 export const getCompanyJobApplications = async (companyId, filters = {}) => {
   try {
     const applicationsRef = collection(db, "applications");
-    let q = query(
-      applicationsRef,
+    const constraints = [
       where("companyId", "==", companyId),
-      where("type", "==", "job")
-    );
+      where("type", "==", "job"),
+    ];
 
     if (filters.status) {
-      q = query(q, where("status", "==", filters.status));
+      constraints.push(where("status", "==", filters.status));
     }
     if (filters.jobId) {
-      q = query(q, where("jobId", "==", filters.jobId));
+      constraints.push(where("jobId", "==", filters.jobId));
     }
 
-    q = query(q, orderBy("createdAt", "desc"));
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(applicationsRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const applications = [];

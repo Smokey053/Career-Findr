@@ -16,15 +16,20 @@ import {
 export const getUsers = async (filters = {}) => {
   try {
     const usersRef = collection(db, "users");
-    let q = query(usersRef);
+    const constraints = [];
 
     // Add filters
     if (filters.role) {
-      q = query(q, where("role", "==", filters.role));
+      constraints.push(where("role", "==", filters.role));
     }
     if (filters.status) {
-      q = query(q, where("status", "==", filters.status));
+      constraints.push(where("status", "==", filters.status));
     }
+
+    const q =
+      constraints.length > 0
+        ? query(usersRef, ...constraints)
+        : query(usersRef);
 
     const querySnapshot = await getDocs(q);
     const users = [];
@@ -221,11 +226,13 @@ export const getPlatformStats = async () => {
 export const searchCandidates = async (filters = {}) => {
   try {
     const usersRef = collection(db, "users");
-    let q = query(usersRef, where("role", "==", "student"));
+    const constraints = [where("role", "==", "student")];
 
     if (filters.status) {
-      q = query(q, where("status", "==", filters.status));
+      constraints.push(where("status", "==", filters.status));
     }
+
+    const q = query(usersRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const candidates = [];

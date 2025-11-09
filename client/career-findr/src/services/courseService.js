@@ -94,14 +94,16 @@ export const getInstitutionCourses = async (institutionId) => {
 export const getAllCourses = async (filters = {}) => {
   try {
     const coursesRef = collection(db, "courses");
-    let q = query(coursesRef, where("status", "==", "active"));
+    const constraints = [where("status", "==", "active")];
 
     // Add filters if provided
     if (filters.field) {
-      q = query(q, where("field", "==", filters.field));
+      constraints.push(where("field", "==", filters.field));
     }
 
-    q = query(q, orderBy("createdAt", "desc"));
+    constraints.push(orderBy("createdAt", "desc"));
+
+    const q = query(coursesRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const courses = [];
