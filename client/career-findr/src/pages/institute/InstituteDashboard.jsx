@@ -50,6 +50,20 @@ export default function InstituteDashboard() {
     queryFn: () => getInstitutionApplications(user.uid),
   });
 
+  // Calculate statistics
+  const admissionsCount =
+    applications?.filter((app) => app.status === "approved").length || 0;
+  const stats = {
+    totalAdmissions: admissionsCount,
+    acceptanceRate:
+      applications?.length > 0
+        ? Math.round((admissionsCount / applications.length) * 100)
+        : 0,
+    averageResponseTime: 2, // Placeholder
+    totalStudentsEnrolled:
+      courses?.reduce((sum, course) => sum + (course.enrolled || 0), 0) || 0,
+  };
+
   if (coursesLoading) {
     return <LoadingScreen message="Loading dashboard..." />;
   }
