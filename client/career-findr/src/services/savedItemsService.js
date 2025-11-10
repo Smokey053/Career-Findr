@@ -8,6 +8,8 @@ import {
   doc,
   getDoc,
   deleteDoc,
+  addDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 
 const mapTimestamp = (value) => {
@@ -91,4 +93,74 @@ export const removeSavedItem = async (userId, type, itemId) => {
   if (docSnap.exists()) {
     await deleteDoc(docRef);
   }
+};
+
+// Save an item (job or course)
+export const saveItem = async (userId, itemData) => {
+  if (!userId || !itemData) {
+    throw new Error("User ID and item data are required");
+  }
+
+  const savedRef = collection(db, "savedItems");
+  
+  // Check if already saved
+  const existingQuery = query(
+    savedRef,
+    where("userId", "==", userId),
+    where("itemId", "==", itemData.itemId),
+    where("type", "==", itemData.itemType)
+  );
+  
+  const existingSnapshot = await getDocs(existingQuery);
+  if (!existingSnapshot.empty) {
+    return; // Already saved
+  }
+
+  await addDoc(savedRef, {
+    userId,
+    itemId: itemData.itemId,
+    type: itemData.itemType,
+    itemData: itemData.itemData || {},
+    savedAt: serverTimestamp(),
+  });
+};
+
+// Unsave an item
+export const unsaveItem = async (userId, itemId, itemType) => {
+  if (!userId || !itemId || !itemType) {
+    throw new Error("User ID, item ID, and item type are required");
+  }
+
+  const savedRef = collection(db, "savedItems");
+  const savedQuery = query(
+    savedRef,
+    where("userId", "==", userId),
+    where("itemId", "==", itemId),
+    where("type", "==", itemType)
+  );
+
+  const snapshot = await getDocs(savedQuery);
+  if (!snapshot.empty) {
+    const batch = writeBatch(db);
+    snapshot.forEach((docSnap) => batch.delete(docSnap.ref));
+    await batch.commit();
+  }
+};
+
+// Check if an item is saved
+export const checkIfSaved = async (userId, itemId, itemType) => {
+  if (!userId || !itemId || !itemType) {
+    return false;
+  }
+
+  const savedRef = collection(db, "savedItems");
+  const savedQuery = query(
+    savedRef,
+    where("userId", "==", userId),
+    where("itemId", "==", itemId),
+    where("type", "==", itemType)
+  );
+
+  const snapshot = await getDocs(savedQuery);
+  return !snapshot.empty;
 };

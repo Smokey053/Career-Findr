@@ -1,9 +1,7 @@
 🎓 Career Findr
 Multi-role career management platform connecting students, educational institutions, and companies for seamless course enrollment and job placement.
 
-https://img.shields.io/badge/status-production%2520ready-success
 https://img.shields.io/badge/version-2.0.0-blue
-https://img.shields.io/badge/firebase-10.x-orange
 https://img.shields.io/badge/react-19.1.1-blue
 
 ✨ Key Features
@@ -96,18 +94,5 @@ bash
 npm run build
 firebase deploy
 Live URL: https://career-findr.web.app
-
-🤝 Contributing
-Contributions welcome! Please:
-
-Fork the repository
-
-Create feature branch
-
-Commit changes following ESLint/Prettier rules
-
-Open Pull Request
-
-Built with ❤️ using React, Material-UI, and Firebase
 Status: ✅ Production Ready | Version: 2.0.0
 Live Demo: https://career-findr.web.app

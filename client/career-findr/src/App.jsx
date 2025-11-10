@@ -22,9 +22,12 @@ import TermsOfService from "./pages/TermsOfService";
 // Student Pages
 import StudentDashboard from "./pages/student/StudentDashboard";
 import CourseSearch from "./pages/student/CourseSearch";
+import CourseDetails from "./pages/student/CourseDetails";
 import MyApplications from "./pages/student/MyApplications";
 import ApplicationForm from "./pages/student/ApplicationForm";
 import JobBoard from "./pages/student/JobBoard";
+import JobDetails from "./pages/student/JobDetails";
+import JobApplicationForm from "./pages/student/JobApplicationForm";
 
 // Institute Pages
 import InstituteDashboard from "./pages/institute/InstituteDashboard";
@@ -104,6 +107,15 @@ function App() {
                       }
                     />
                     <Route
+                      path="/courses/:courseId"
+                      element={
+                        <ProtectedRoute allowedRoles={["student"]}>
+                          <Navbar />
+                          <CourseDetails />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
                       path="/applications"
                       element={
                         <ProtectedRoute allowedRoles={["student"]}>
@@ -127,6 +139,24 @@ function App() {
                         <ProtectedRoute allowedRoles={["student"]}>
                           <Navbar />
                           <JobBoard />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/jobs/:jobId"
+                      element={
+                        <ProtectedRoute allowedRoles={["student"]}>
+                          <Navbar />
+                          <JobDetails />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/jobs/:jobId/apply"
+                      element={
+                        <ProtectedRoute allowedRoles={["student"]}>
+                          <Navbar />
+                          <JobApplicationForm />
                         </ProtectedRoute>
                       }
                     />
