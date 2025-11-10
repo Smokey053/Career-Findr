@@ -16,6 +16,23 @@ import {
 export const submitCourseApplication = async (applicationData, studentId) => {
   try {
     const applicationsRef = collection(db, "applications");
+
+    // Check if student already has 2 applications to this institution
+    const existingAppsQuery = query(
+      applicationsRef,
+      where("studentId", "==", studentId),
+      where("institutionId", "==", applicationData.institutionId),
+      where("type", "==", "course")
+    );
+
+    const existingAppsSnapshot = await getDocs(existingAppsQuery);
+
+    if (existingAppsSnapshot.size >= 2) {
+      throw new Error(
+        "You have already applied to 2 courses at this institution. Maximum 2 applications per institution allowed."
+      );
+    }
+
     const newApplication = {
       ...applicationData,
       studentId,

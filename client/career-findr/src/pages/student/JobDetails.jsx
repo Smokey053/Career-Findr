@@ -31,7 +31,11 @@ import {
   CalendarToday,
 } from "@mui/icons-material";
 import { getJob } from "../../services/jobService";
-import { saveItem, unsaveItem, checkIfSaved } from "../../services/savedItemsService";
+import {
+  saveItem,
+  unsaveItem,
+  checkIfSaved,
+} from "../../services/savedItemsService";
 import { useAuth } from "../../contexts/AuthContext";
 import LoadingScreen from "../../components/common/LoadingScreen";
 
@@ -129,7 +133,9 @@ export default function JobDetails() {
               <Typography variant="h4" gutterBottom fontWeight="bold">
                 {job.title}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
+              >
                 <Chip
                   icon={<Business />}
                   label={job.companyName || "Company"}
@@ -176,9 +182,7 @@ export default function JobDetails() {
                     Location
                   </Typography>
                 </Box>
-                <Typography variant="h6">
-                  {job.location || "Remote"}
-                </Typography>
+                <Typography variant="h6">{job.location || "Remote"}</Typography>
               </CardContent>
             </Card>
           </Grid>

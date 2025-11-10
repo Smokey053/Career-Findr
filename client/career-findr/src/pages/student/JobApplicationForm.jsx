@@ -187,7 +187,9 @@ export default function JobApplicationForm() {
                 rows={8}
                 placeholder="Explain why you're a great fit for this position..."
                 value={formData.coverLetter}
-                onChange={(e) => handleInputChange("coverLetter", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("coverLetter", e.target.value)
+                }
                 error={!!errors.coverLetter}
                 helperText={errors.coverLetter}
                 disabled={submitMutation.isPending}
@@ -205,7 +207,11 @@ export default function JobApplicationForm() {
                 label="Upload Resume (PDF, DOC, DOCX)"
               />
               {errors.resumeUrl && (
-                <Typography variant="caption" color="error" sx={{ mt: 1, display: "block" }}>
+                <Typography
+                  variant="caption"
+                  color="error"
+                  sx={{ mt: 1, display: "block" }}
+                >
                   {errors.resumeUrl}
                 </Typography>
               )}
@@ -225,7 +231,9 @@ export default function JobApplicationForm() {
                 fullWidth
                 placeholder="https://yourportfolio.com"
                 value={formData.portfolioUrl}
-                onChange={(e) => handleInputChange("portfolioUrl", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("portfolioUrl", e.target.value)
+                }
                 disabled={submitMutation.isPending}
               />
             </Grid>
@@ -239,7 +247,9 @@ export default function JobApplicationForm() {
                 fullWidth
                 placeholder="https://linkedin.com/in/yourprofile"
                 value={formData.linkedinUrl}
-                onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("linkedinUrl", e.target.value)
+                }
                 disabled={submitMutation.isPending}
               />
             </Grid>
@@ -255,7 +265,9 @@ export default function JobApplicationForm() {
                 rows={4}
                 placeholder="Any additional information you'd like to share..."
                 value={formData.additionalInfo}
-                onChange={(e) => handleInputChange("additionalInfo", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("additionalInfo", e.target.value)
+                }
                 disabled={submitMutation.isPending}
               />
             </Grid>
@@ -277,7 +289,9 @@ export default function JobApplicationForm() {
                   startIcon={<Send />}
                   disabled={submitMutation.isPending}
                 >
-                  {submitMutation.isPending ? "Submitting..." : "Submit Application"}
+                  {submitMutation.isPending
+                    ? "Submitting..."
+                    : "Submit Application"}
                 </Button>
               </Box>
             </Grid>

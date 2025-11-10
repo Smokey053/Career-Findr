@@ -34,6 +34,7 @@ import InstituteDashboard from "./pages/institute/InstituteDashboard";
 import CourseManagement from "./pages/institute/CourseManagement";
 import CourseForm from "./pages/institute/CourseForm";
 import ApplicationReview from "./pages/institute/ApplicationReview";
+import FacultyManagement from "./pages/institute/FacultyManagement";
 
 // Company Pages
 import CompanyDashboard from "./pages/company/CompanyDashboard";
@@ -46,6 +47,7 @@ import CandidateSearch from "./pages/company/CandidateSearch";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserManagement from "./pages/admin/UserManagement";
 import PlatformStats from "./pages/admin/PlatformStats";
+import AnnouncementManagement from "./pages/admin/AnnouncementManagement";
 
 // Common Pages (All Roles)
 import SavedItems from "./pages/common/SavedItems";
@@ -181,6 +183,15 @@ function App() {
                       }
                     />
                     <Route
+                      path="/institute/faculties"
+                      element={
+                        <ProtectedRoute allowedRoles={["institute"]}>
+                          <Navbar />
+                          <FacultyManagement />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
                       path="/institute/courses/new"
                       element={
                         <ProtectedRoute allowedRoles={["institute"]}>
@@ -289,6 +300,15 @@ function App() {
                         <ProtectedRoute allowedRoles={["admin"]}>
                           <Navbar />
                           <PlatformStats />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin/announcements"
+                      element={
+                        <ProtectedRoute allowedRoles={["admin"]}>
+                          <Navbar />
+                          <AnnouncementManagement />
                         </ProtectedRoute>
                       }
                     />

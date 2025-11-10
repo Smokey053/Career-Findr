@@ -142,7 +142,9 @@ export default function Navbar() {
             alignItems="center"
             gap={1}
             sx={{ cursor: "pointer" }}
-            onClick={() => navigate("/")}
+            onClick={() =>
+              user ? navigate(getDashboardPath()) : navigate("/")
+            }
           >
             <WorkOutline sx={{ color: "primary.main", fontSize: 32 }} />
             <Typography

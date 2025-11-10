@@ -102,7 +102,7 @@ export const saveItem = async (userId, itemData) => {
   }
 
   const savedRef = collection(db, "savedItems");
-  
+
   // Check if already saved
   const existingQuery = query(
     savedRef,
@@ -110,7 +110,7 @@ export const saveItem = async (userId, itemData) => {
     where("itemId", "==", itemData.itemId),
     where("type", "==", itemData.itemType)
   );
-  
+
   const existingSnapshot = await getDocs(existingQuery);
   if (!existingSnapshot.empty) {
     return; // Already saved

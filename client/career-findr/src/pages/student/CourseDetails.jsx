@@ -26,7 +26,11 @@ import {
   Bookmark,
 } from "@mui/icons-material";
 import { getCourse } from "../../services/courseService";
-import { saveItem, unsaveItem, checkIfSaved } from "../../services/savedItemsService";
+import {
+  saveItem,
+  unsaveItem,
+  checkIfSaved,
+} from "../../services/savedItemsService";
 import { useAuth } from "../../contexts/AuthContext";
 import LoadingScreen from "../../components/common/LoadingScreen";
 
@@ -124,7 +128,9 @@ export default function CourseDetails() {
               <Typography variant="h4" gutterBottom fontWeight="bold">
                 {course.title}
               </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
+              >
                 <Chip
                   icon={<School />}
                   label={course.institutionName || "Institution"}
@@ -219,7 +225,9 @@ export default function CourseDetails() {
                     Location
                   </Typography>
                 </Box>
-                <Typography variant="h6">{course.location || "Online"}</Typography>
+                <Typography variant="h6">
+                  {course.location || "Online"}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
