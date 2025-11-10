@@ -253,6 +253,20 @@ export default function Login() {
               <Typography
                 variant="body2"
                 color="text.secondary"
+                sx={{ mt: 1, fontSize: { xs: "0.875rem", sm: "0.9rem" } }}
+              >
+                <Link
+                  component={RouterLink}
+                  to="/forgot-password"
+                  color="primary"
+                  fontWeight={500}
+                >
+                  Forgot Password?
+                </Link>
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
                 sx={{ mt: 2, fontSize: { xs: "0.875rem", sm: "0.9rem" } }}
               >
                 <Link

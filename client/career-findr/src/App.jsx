@@ -14,6 +14,7 @@ import ImpersonationBanner from "./components/common/ImpersonationBanner";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -84,6 +85,7 @@ function App() {
                     <Route path="/" element={<Landing />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
